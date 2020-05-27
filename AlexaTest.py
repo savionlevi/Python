@@ -38,7 +38,6 @@ web_statistics_with_client_first_run = {}
 web_statistics_without_client_second_run = {}
 
 
-@given("etp-client is installed and enabled")
 def step_impl(context):
     print("client is enabled")
 
@@ -293,12 +292,10 @@ def get_average_statistics():
             total_time_PLT_without_client / (total_number_of_sites / 2)))
 
 
-@given("etp-client is disabled")
 def step_impl(context):
-    ClientUtil.disable_etp_client()
     sleep_time = 15
     print(
-        "*** *** *** ***              sleeping to allow disabling client for %s seconds               *** *** *** ***" % sleep_time)
+        "*** *** *** ***              sleeping to allow disabling  for %s seconds               *** *** *** ***" % sleep_time)
     time.sleep(sleep_time)
 
 
@@ -308,7 +305,7 @@ def step_impl(context):
     for key in web_statistics_with_client_first_run.keys():
         assert (web_statistics_with_client_first_run[key] * 1000 - web_statistics_without_client_second_run[
             key] * 1000 > 5)
-        assert False, 'etp client increase is more then 5ms for these sites: key: {}'.format(key)
+        assert False, 'increase is more then 5ms for these sites: key: {}'.format(key)
 
 
 @then("client will be enabled")
