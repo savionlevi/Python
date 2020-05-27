@@ -1,7 +1,7 @@
 # Python
 
 This repo includes:
-Testing using selenium.
+Testing using selenium & Python.
 bonus features: 
     multi browser testing, 
     parallel testing,
