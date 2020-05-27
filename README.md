@@ -1,9 +1,9 @@
 # Python
 
 This repo includes:
-Testing using selenium & Python.
+1) Testing using selenium & Python.
 bonus features: 
-    multi browser testing, 
-    parallel testing,
-    performance statistics (cpu, memory, PLT, TTFB)
-    error validations
+   a) multi browser testing, 
+   b) parallel testing,
+   c) performance statistics (cpu, memory, PLT, TTFB)
+   d) error validations
