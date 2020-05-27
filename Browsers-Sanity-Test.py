@@ -26,7 +26,6 @@ def step_impl(context):
 
 def create_site_dictionary():
     sites = {
-        "https://www.akamaietpcnctest.com/": "Dogfooding",
         "http://17.178.96.59/": "iPhone",
         "https://www.nytimes.com/": "times",
         "https://www.edition.cnn.com/": "cnn",
