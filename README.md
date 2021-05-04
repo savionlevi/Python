@@ -3,7 +3,7 @@
 This repo includes:
 1) Testing using selenium & Python.
 
-2) bonus features: 
+2) additional features: 
 
    a) multi browser testing, 
    b) parallel testing,
