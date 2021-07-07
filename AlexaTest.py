@@ -1,3 +1,5 @@
+import random
+import string
 import time
 
 import psutil
@@ -38,6 +40,7 @@ web_statistics_with_client_first_run = {}
 web_statistics_without_client_second_run = {}
 
 
+@given("etp-client is installed and enabled")
 def step_impl(context):
     print("client is enabled")
 
@@ -64,143 +67,35 @@ def step_impl(context):
                                                                                key]))
 
 
-def selecting_alexa_sites():
-    baseUrl = "http://www."
-    alexaSites = [
-        baseUrl + "google.com",
-        baseUrl + "youtube.com",
-        baseUrl + "facebook.com",
-        baseUrl + "baidu.com",
-        baseUrl + "wikipedia.org",
-        baseUrl + "yahoo.com",
-        baseUrl + "qq.com",
-        baseUrl + "taobao.com",
-        baseUrl + "tmall.com",
-        baseUrl + "sohu.com",
-        baseUrl + "amazon.com",
-        baseUrl + "live.com",
-        baseUrl + "vk.com",
-        baseUrl + "twitter.com",
-        baseUrl + "reddit.com",
-        baseUrl + "instagram.com",
-        baseUrl + "sina.com",
-        baseUrl + "360.cn",
-        baseUrl + "linkedin.com",
-        baseUrl + "jd.com",
-        baseUrl + "weibo.com",
-        baseUrl + "yahoo.co",
-        baseUrl + "hao123.com",
-        baseUrl + "ntd.tv",
-        baseUrl + "yandex.ru",
-        baseUrl + "ebay.com",
-        baseUrl + "4chan.org.",
-        baseUrl + "msn.com",
-        baseUrl + "homedepot.com",
-        baseUrl + "wordpress.com",
-        baseUrl + "bing.com",
-        baseUrl + "netflix.com",
-        baseUrl + "ok.ru",
-        baseUrl + "aliexpress.com",
-        baseUrl + "tutorialspoint.com",
-        baseUrl + "list.tmall",
-        baseUrl + "microsoft.com",
-        baseUrl + "blogspot.com",
-        baseUrl + "imgur.com",
-        baseUrl + "stackoverflow.com",
-        baseUrl + "imdb.com",
-        baseUrl + "office.com",
-        baseUrl + "ign.com",
-        baseUrl + "tianya.cn",
-        baseUrl + "diply.com",
-        baseUrl + "apple.com",
-        baseUrl + "dell.com",
-        baseUrl + "twitch.tv",
-        baseUrl + "github.com",
-        baseUrl + "csdn.net",
-        baseUrl + "mail.ru",
-        baseUrl + "target.com",
-        baseUrl + "alipay.com",
-        baseUrl + "pinterest.com",
-        baseUrl + "paypal.com",
-        baseUrl + "wikia.com",
-        baseUrl + "atlassian.net.",
-        baseUrl + "adobe.com",
-        baseUrl + "alibaba.com",
-        baseUrl + "bbc.com.",
-        baseUrl + "dropbox.com",
-        baseUrl + "askcom.com",
-        baseUrl + "stackexchange.com",
-        baseUrl + "amazon.de",
-        baseUrl + "webmd.com.",
-        baseUrl + "salesforce.com",
-        baseUrl + "theguardian.com.",
-        baseUrl + "theverge.com.",
-        baseUrl + "ettoday.net.",
-        baseUrl + "huffingtonpost.com.",
-        baseUrl + "udemy.com.",
-        baseUrl + "trello.com.",
-        baseUrl + "chase.com.",
-        baseUrl + "steampowered.com.",
-        baseUrl + "cnet.com.",
-        baseUrl + "outbrain.com.",
-        baseUrl + "9gag.com.",
-        baseUrl + "indeed.com.",
-        baseUrl + "vice.com.",
-        baseUrl + "mediafire.com.",
-        baseUrl + "uber.com.",
-        baseUrl + "xda-developers.com.",
-        baseUrl + "bp.blogspot.com.",
-        baseUrl + "playstation.com.",
-        baseUrl + "slack.com.",
-        baseUrl + "github.io.",
-        baseUrl + "howtogeek.com.",
-        baseUrl + "coursera.org.",
-        baseUrl + "java.com.",
-        baseUrl + "glassdoor.com.",
-        baseUrl + "nbcnews.com.",
-        baseUrl + "rottentomatoes.com.",
-        baseUrl + "investing.com.",
-        baseUrl + "washingtonpost.com.",
-        baseUrl + "w3schools.com.",
-        baseUrl + "gsmarena.com.",
-        baseUrl + "cbsnews.com.",
-        baseUrl + "google.be.",
-        baseUrl + "nba.com.",
-        baseUrl + "hp.com.",
-        baseUrl + "oracle.com.",
-        baseUrl + "ameblo.jp.",
-        baseUrl + "blogspot.in.",
-        baseUrl + "nih.gov.",
-        baseUrl + "telegraph.co.uk.",
-        baseUrl + "samsung.com.",
-        baseUrl + "wikihow.com.",
-        baseUrl + "shutterstock.com.",
-        baseUrl + "godaddy.com.",
-        baseUrl + "steamcommunity.com.",
-        baseUrl + "bankofamerica.com.",
-        baseUrl + "spotify.com.",
-        baseUrl + "mercadolivre.com.br.",
-        baseUrl + "livejournal.com.",
-        baseUrl + "cnbc.com.",
-        baseUrl + "ozock.com.",
-        baseUrl + "forbes.com.",
-        baseUrl + "zillow.com",
-        baseUrl + "weather.com.",
-        baseUrl + "wsj.com.",
-        baseUrl + "tistory.com.",
-        baseUrl + "marketwatch.com.",
-        baseUrl + "goo.ne.jp.",
-        baseUrl + "redtube.com.",
-        baseUrl + "foxnews.com.",
-        baseUrl + "apache.org.",
-        baseUrl + "southwest.com.",
-        baseUrl + "verizon.com.",
-        baseUrl + "cloudflare.com.",
-        baseUrl + "skype.com.",
-        baseUrl + "mozilla.org."
+def selecting_alexa_sites(iterations):
+    site_list = ["google.com", "youtube.com", "facebook.com", "wikipedia.org", "yahoo.com", "amazon.com",
+                 "live.com", "vk.com", "twitter.com", "reddit.com", "foxnews.com", "apache.org", "southwest.com",
+                 "cloudflare.com", "instagram.com", "linkedin.com", "yahoo.co", "ameblo.jp", "verizon.com",
+                 "udemy.com", "target.com", "imgur.com", "yandex.ru", "ebay.com", "4chan.org", "msn.com",
+                 "homedepot.com", "wordpress.com", "bing.com", "netflix.com", "ok.ru", "aliexpress.com",
+                 "tutorialspoint.com", "list.tmall.com", "microsoft.com", "blogspot.com", "stackoverflow.com",
+                 "imdb.com", "office.com", "ign.com", "diply.com", "weather.com", "wsj.com", "marketwatch.com",
+                 "goo.ne.jp", "apple.com", "dell.com", "twitch.tv", "github.com", "csdn.net", "mail.ru",
+                 "alipay.com", "pinterest.com", "paypal.com", "wikia.com", "atlassian.net", "adobe.com",
+                 "alibaba.com", "livejournal.com", "cnbc.com", "forbes.com", "zillow.com",
+                 "bbc.com", "dropbox.com", "stackexchange.com", "amazon.de", "webmd.com", "salesforce.com",
+                 "theguardian.com", "theverge.com", "ettoday.net", "huffingtonpost.com", "trello.com", "chase.com",
+                 "steampowered.com", "cnet.com", "outbrain.com", "9gag.com", "indeed.com", "vice.com",
+                 "mediafire.com", "uber.com", "xda-developers.com", "mozilla.org", "playstation.com", "slack.com",
+                 "github.io", "howtogeek.com", "coursera.org", "java.com", "glassdoor.com", "nbcnews.com",
+                 "rottentomatoes.com", "investing.com", "washingtonpost.com", "w3schools.com", "gsmarena.com",
+                 "cbsnews.com", "google.be", "nba.com", "hp.com", "spotify.com", "oracle.com", "nih.gov",
+                 "telegraph.co.uk", "samsung.com", "wikihow.com", "skype.com", "shutterstock.com", "godaddy.com",
+                 "steamcommunity.com", "bankofamerica.com"]
 
-    ]
-    return alexaSites
+    baseUrl = "https://www."
+
+    new_list = []
+    for i in range(iterations):
+        for site in site_list:
+            new_list.append(baseUrl + site)
+
+    return new_list
 
 
 def navigate_to_site(sites, results):
@@ -214,7 +109,7 @@ def navigate_to_site(sites, results):
         # get_response_code(site)
         driver.get(site)
         (ttfb, plt) = web_statistics(driver)
-        print_errors_from_console_log(driver)
+        print_errors_from_console_log(driver, site)
         results[site + '_TTFB'] = ttfb
         results[site + '_PLT'] = plt
 
@@ -241,11 +136,15 @@ def web_statistics(driver):
     return (backendPerformance_calc, frontendPerformance_calc)
 
 
-def print_errors_from_console_log(driver):
+def print_errors_from_console_log(driver, website_name=None):
     try:
         for log_entry in driver.get_log('browser'):
             if log_entry["level"] == "SEVERE" and 'Failed to load resource' in log_entry['message']:
                 print(colored(log_entry, 'red'))
+                if 'status of' in log_entry['message']:
+                    print("saving screenshot for site: "+website_name)
+                    print(randomString()+".png")
+                    driver.save_screenshot(randomString()+".png")
     except Exception as e:
         print("Exception when reading browser log")
         print(str(e))
@@ -292,10 +191,12 @@ def get_average_statistics():
             total_time_PLT_without_client / (total_number_of_sites / 2)))
 
 
+@given("etp-client is disabled")
 def step_impl(context):
+    ClientUtil.disable_etp_client()
     sleep_time = 15
     print(
-        "*** *** *** ***              sleeping to allow disabling  for %s seconds               *** *** *** ***" % sleep_time)
+        "*** *** *** ***              sleeping to allow disabling client for %s seconds               *** *** *** ***" % sleep_time)
     time.sleep(sleep_time)
 
 
@@ -305,10 +206,15 @@ def step_impl(context):
     for key in web_statistics_with_client_first_run.keys():
         assert (web_statistics_with_client_first_run[key] * 1000 - web_statistics_without_client_second_run[
             key] * 1000 > 5)
-        assert False, 'increase is more then 5ms for these sites: key: {}'.format(key)
+        assert False, 'etp client increase is more then 5ms for these sites: key: {}'.format(key)
 
 
 @then("client will be enabled")
-def step_imple(conetext):
+def step_imple(context):
     ClientUtil.client_restart()
     time.sleep(20)
+
+def randomString(stringLength=8):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
+
