@@ -11,18 +11,7 @@ from termcolor import colored
 
 from etp_client.Utils.ClientUtilClass import ClientUtil
 
-# Documentation
-# This test suite is for validating client's performance, and that we don't break the internet
-# The test:
-#       1) navigate to sites one after the other,
-#       2) check performance statistics such as PLT and TTFB
-#       3)  print errors in the browser
-#       4) compare performance statistics with and without client
-# flow: we are in protected mode
-#       test starts (navigating to sites)
-#       1 minute sleep time for disabling the client manually
-#       test continues (navigating to sites)
-#       test concludes , statistics + average are printed
+
 
 use_step_matcher("re")
 
